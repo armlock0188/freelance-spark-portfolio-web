@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -25,11 +26,17 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { name: "Início", href: "#home" },
+    { name: "Início", href: "/" },
     { name: "Serviços", href: "#services" },
     { name: "Projetos", href: "#projects" },
     { name: "Especialidades", href: "#skills" },
     { name: "Contato", href: "#contact" },
+  ];
+
+  const servicePages = [
+    { name: "Landing Pages", href: "/landing-pages" },
+    { name: "Desenvolvimento Web", href: "/desenvolvimento-web" },
+    { name: "Desenvolvimento Backend", href: "/desenvolvimento-backend" },
   ];
 
   return (
@@ -37,23 +44,41 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
-            <h1 className="text-xl font-heading font-bold">
+            <Link to="/" className="text-xl font-heading font-bold">
               <span className="text-primary">Portfolio</span>
               <span className="text-gray-800">.pro</span>
-            </h1>
+            </Link>
           </div>
           
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href.startsWith('#') ? `/${item.href}` : item.href}
                 className="px-3 py-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
+            <div className="relative group px-3 py-2">
+              <span className="text-sm font-medium text-gray-800 hover:text-primary transition-colors cursor-pointer">
+                Serviços
+              </span>
+              <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="py-1">
+                  {servicePages.map((service) => (
+                    <Link
+                      key={service.name}
+                      to={service.href}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="ml-6">
               <Button>Contrate-me</Button>
             </div>
@@ -73,15 +98,28 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-b">
           <div className="px-4 pt-2 pb-4 space-y-1">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href.startsWith('#') ? `/${item.href}` : item.href}
                 className="block py-2 text-base font-medium text-gray-800 hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
+            <div className="py-2 border-t border-gray-100 mt-2">
+              <p className="text-sm font-medium text-gray-500 mb-2">Serviços</p>
+              {servicePages.map((service) => (
+                <Link
+                  key={service.name}
+                  to={service.href}
+                  className="block py-2 pl-3 text-base font-medium text-gray-800 hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {service.name}
+                </Link>
+              ))}
+            </div>
             <div className="pt-2">
               <Button className="w-full">Contrate-me</Button>
             </div>

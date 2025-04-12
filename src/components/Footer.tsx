@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
@@ -45,10 +46,22 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">Serviços</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Desenvolvimento Web</a></li>
+              <li>
+                <Link to="/landing-pages" className="text-gray-300 hover:text-white transition-colors">
+                  Landing Pages
+                </Link>
+              </li>
+              <li>
+                <Link to="/desenvolvimento-web" className="text-gray-300 hover:text-white transition-colors">
+                  Desenvolvimento Web
+                </Link>
+              </li>
+              <li>
+                <Link to="/desenvolvimento-backend" className="text-gray-300 hover:text-white transition-colors">
+                  Desenvolvimento Backend
+                </Link>
+              </li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">UI/UX Design</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Landing Pages</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Desenvolvimento Backend</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">SEO & Analytics</a></li>
             </ul>
           </div>
